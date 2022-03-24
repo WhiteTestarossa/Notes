@@ -12,6 +12,10 @@
 		93E433DF27EB508900D16BA4 /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E433DE27EB508900D16BA4 /* NoteListViewController.swift */; };
 		93E433E427EB508E00D16BA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93E433E327EB508E00D16BA4 /* Assets.xcassets */; };
 		93E433E727EB508E00D16BA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93E433E527EB508E00D16BA4 /* LaunchScreen.storyboard */; };
+		93E433EF27EB56CF00D16BA4 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E433EE27EB56CF00D16BA4 /* NoteTableViewCell.swift */; };
+		93E433F127EC65DC00D16BA4 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E433F027EC65DC00D16BA4 /* Note.swift */; };
+		93E433F527EC6CB000D16BA4 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E433F427EC6CB000D16BA4 /* FooterView.swift */; };
+		93E433F727ECCBCC00D16BA4 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E433F627ECCBCC00D16BA4 /* NoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		93E433E327EB508E00D16BA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93E433E627EB508E00D16BA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93E433E827EB508E00D16BA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93E433EE27EB56CF00D16BA4 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		93E433F027EC65DC00D16BA4 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		93E433F427EC6CB000D16BA4 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		93E433F627ECCBCC00D16BA4 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +65,10 @@
 				93E433DA27EB508900D16BA4 /* AppDelegate.swift */,
 				93E433DC27EB508900D16BA4 /* SceneDelegate.swift */,
 				93E433DE27EB508900D16BA4 /* NoteListViewController.swift */,
+				93E433EE27EB56CF00D16BA4 /* NoteTableViewCell.swift */,
+				93E433F427EC6CB000D16BA4 /* FooterView.swift */,
+				93E433F027EC65DC00D16BA4 /* Note.swift */,
+				93E433F627ECCBCC00D16BA4 /* NoteViewController.swift */,
 				93E433E327EB508E00D16BA4 /* Assets.xcassets */,
 				93E433E527EB508E00D16BA4 /* LaunchScreen.storyboard */,
 				93E433E827EB508E00D16BA4 /* Info.plist */,
@@ -133,9 +145,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93E433F727ECCBCC00D16BA4 /* NoteViewController.swift in Sources */,
+				93E433F127EC65DC00D16BA4 /* Note.swift in Sources */,
 				93E433DF27EB508900D16BA4 /* NoteListViewController.swift in Sources */,
 				93E433DB27EB508900D16BA4 /* AppDelegate.swift in Sources */,
+				93E433F527EC6CB000D16BA4 /* FooterView.swift in Sources */,
 				93E433DD27EB508900D16BA4 /* SceneDelegate.swift in Sources */,
+				93E433EF27EB56CF00D16BA4 /* NoteTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
