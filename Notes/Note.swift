@@ -7,12 +7,8 @@
 
 import Foundation
 
-struct Note: Hashable {
-    var name: String
-    var location: String
-    
-    init(name: String, location: String) {
-        self.name = name
-        self.location = location
-    }
+class Note {
+    let id = UUID()
+    var text: String = ""
+    var date: Date = Date()
 }

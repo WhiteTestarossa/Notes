@@ -30,13 +30,14 @@ class NoteTableViewCell: UITableViewCell {
         configureStackView()
         
         titlesStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(titlesStackView)
+        contentView.addSubview(titlesStackView)
         
         NSLayoutConstraint.activate([
-            titlesStackView.leadingAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.leadingAnchor),
-            titlesStackView.topAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.topAnchor),
-            titlesStackView.trailingAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.trailingAnchor),
-            titlesStackView.bottomAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.bottomAnchor)
+            titlesStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15.0),
+//            titlesStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 15.0),
+            titlesStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15.0),
+            titlesStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15.0),
+            
         ])
     }
     
@@ -55,9 +56,11 @@ class NoteTableViewCell: UITableViewCell {
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
         titleLabel.lineBreakMode = .byTruncatingTail
         
+        
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         descriptionLabel.lineBreakMode = .byTruncatingTail
         descriptionLabel.textColor = .lightGray
+        
     }
     
 }
