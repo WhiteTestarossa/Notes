@@ -48,12 +48,13 @@ class NoteViewController: UIViewController {
         
         if self.isMovingFromParent {
             if let note = note {
-                let text = note.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-                if !text.isEmpty {
+                if !note.text.isEmpty {
                     note.date = Date()
+                    CoreDataManager.shared.save()
                     delegate?.didFinishEdditingNote()
                 } else {
                     delegate?.didCancelNote(id: note.id)
+                    CoreDataManager.shared.deleteNote(note: note)
                 }
             }
         }

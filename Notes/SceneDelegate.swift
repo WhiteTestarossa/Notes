@@ -13,19 +13,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-         guard let windowScene = (scene as? UIWindowScene) else { return }
-         
-         if #available(iOS 13.0, *) {
-             window = UIWindow(windowScene: windowScene)
-         } else {
-             window = UIWindow(frame: UIScreen.main.bounds)
-         }
-         
-         let noteListVieController = NoteListViewController()
-         let navigationController = UINavigationController(rootViewController: noteListVieController)
-         
-         window?.rootViewController = navigationController
-         window?.makeKeyAndVisible()
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        if #available(iOS 13.0, *) {
+            window = UIWindow(windowScene: windowScene)
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+        }
+        
+        let noteListVieController = NoteListViewController()
+        let navigationController = UINavigationController(rootViewController: noteListVieController)
+        
+        if UserDefaults.standard.bool(forKey: "First Launch") != true {
+            let initialNote = CoreDataManager.shared.createNote(text: "I'm very very first!")
+            noteListVieController.notes.append(initialNote)
+            UserDefaults.standard.setValue(true, forKey: "First Launch")
+        }
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
      }
 
     func sceneDidDisconnect(_ scene: UIScene) {

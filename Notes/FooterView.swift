@@ -14,7 +14,6 @@ class FooterView: UIView {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.textColor = UIColor.lightGray
-        label.text = "0 Notes"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

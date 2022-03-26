@@ -27,27 +27,26 @@ class NoteTableViewCell: UITableViewCell {
     //MARK: - TableViewCell Setup
     func configureCell() {
         configureTitleLabel()
+        configureDescriptionLabel()
         configureStackView()
         
-        titlesStackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titlesStackView)
+        titlesStackView.addArrangedSubview(titleLabel)
+        titlesStackView.addArrangedSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            titlesStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15.0),
-//            titlesStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 15.0),
-            titlesStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15.0),
-            titlesStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15.0),
-            
+            titlesStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20.0),
+            titlesStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10.0),
+            titlesStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20.0),
+            titlesStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10.0),
         ])
     }
     
     //MARK: - StackView Setup
     func configureStackView() {
-        titlesStackView.addArrangedSubview(titleLabel)
-        titlesStackView.addArrangedSubview(descriptionLabel)
         titlesStackView.axis = .vertical
-        titlesStackView.distribution = .fill
-        titlesStackView.alignment = .fill
+        titlesStackView.distribution = .fillEqually
+        titlesStackView.translatesAutoresizingMaskIntoConstraints = false
         titlesStackView.spacing = 4.0
     }
     
@@ -55,12 +54,16 @@ class NoteTableViewCell: UITableViewCell {
     func configureTitleLabel() {
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
         titleLabel.lineBreakMode = .byTruncatingTail
-        
-        
+        titleLabel.numberOfLines = 1
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    //MARK: - Description Setup
+    func configureDescriptionLabel() {
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         descriptionLabel.lineBreakMode = .byTruncatingTail
         descriptionLabel.textColor = .lightGray
-        
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
 }

@@ -13,52 +13,29 @@ class NoteListViewController: UIViewController {
     var tableView = UITableView()
     let footerView = FooterView()
     
-    var notes: [Note] = [
-//            Note(text: "Cafe Deadend", location:"Hong Kong"),
-//            Note(text: "Homei", location: "Hong Kong"),
-//            Note(text: "Teakha", location: "Hong Kong"),
-//            Note(text: "Cafe loisl", location: "Hong Kong"),
-//            Note(text: "Petite Oyster", location: "Hong Kong"),
-//            Note(text: "For Kee Note", location: "HongKong"),
-//            Note(text: "Po's Atelier", location: "Hong Kong"),
-//            Note(text: "Bourke Street Backery", location:"Sydney"),
-//            Note(text: "Haigh's Chocolate", location: "Sydney"),
-//            Note(text: "Palomino Espresso", location: "Sydney"),
-//            Note(text: "Upstate", location: "New York"),
-//            Note(text: "Traif", location: "New York"),
-//            Note(text: "Graham Avenue Meats", location: "New York"),
-//            Note(text: "Waffle & Wolf", location: "NewYork"),
-//            Note(text: "Five Leaves", location: "New York"),
-//            Note(text: "Cafe Lore", location: "New York"),
-//            Note(text: "Confessional", location: "New York"),
-//            Note(text: "Barrafina", location: "London"),
-//            Note(text: "Donostia", location: "London"),
-//            Note(text: "Royal Oak", location: "London"),
-//            Note(text: "CASK Pub and Kitchen", location: "London")
-        ]
+    var notes: [Note] = [] {
+        didSet {
+            footerView.countLabel.text = "\(notes.count == 0 ? "No Notes" : (notes.count == 1) ? "1 Note" : " \(notes.count) Notes")"
+            tableView.separatorStyle = notes.count == 0 ? .none : .singleLine
+        }
+    }
     
     //MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Notes"
-        
         configureTableView()
         configureFooterView()
+        fetchNotes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("ViewWillAppear")
         let selectedIndexPath = self.tableView.indexPathForSelectedRow
         if let indexPath = selectedIndexPath {
             self.tableView.deselectRow(at: indexPath, animated: true)
         }
-    }
-    
-    private func indexForNote(id: UUID, in list: [Note]) -> IndexPath {
-        let row = Int(list.firstIndex(where: { $0.id == id }) ?? 0)
-        return IndexPath(row: row, section: 0)
     }
     
     //MARK: - TableView Setup
@@ -81,6 +58,7 @@ class NoteListViewController: UIViewController {
     
     //MARK: Footer for TableView Setup
     func configureFooterView() {
+        footerView.countLabel.text = String(notes.count)
         let blurEffect = UIBlurEffect(style: .regular)
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         
@@ -107,7 +85,7 @@ class NoteListViewController: UIViewController {
     
     //MARK: - Create New Note
     @objc func createNotePressed() {
-        let newNote = Note()
+        let newNote = CoreDataManager.shared.createNote()
         notes.insert(newNote, at: 0)
         
         let indexPath = IndexPath(row: 0, section: 0)
@@ -119,6 +97,11 @@ class NoteListViewController: UIViewController {
         
         navigationController?.pushViewController(noteViewController, animated: true)
     }
+    
+    func fetchNotes() {
+        notes = CoreDataManager.shared.fetch()
+    }
+    
 }
 
     //MARK: - TableView Delegate and Data Source Methods
@@ -130,7 +113,8 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellId", for: indexPath) as! NoteTableViewCell
-        cell.titleLabel.text = notes[indexPath.row].text
+        cell.titleLabel.text = notes[indexPath.row].title
+        cell.descriptionLabel.text = notes[indexPath.row].desc
         return cell
     }
     
@@ -147,6 +131,7 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            CoreDataManager.shared.deleteNote(note: notes[indexPath.row])
             tableView.beginUpdates()
             notes.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -158,19 +143,24 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     //MARK: - NoteViewController Delegate Methods
 extension NoteListViewController: NoteViewControllerDelegate {
     func didFinishEdditingNote() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         self.navigationController?.popViewController(animated: true)
-        tableView.reloadData()
     }
     
     func didCancelNote(id: UUID) {
-        self.navigationController?.popViewController(animated: true)
-        let indexPath = indexForNote(id: id, in: notes)
+        let index = Int(notes.firstIndex(where: {$0.id == id}) ?? 0)
+        let indexPath = IndexPath(row: index, section: 0)
+        
         notes.remove(at: indexPath.row)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.beginUpdates()
-            self?.tableView.deleteRows(at: [indexPath], with: .fade)
-            self?.tableView.endUpdates()
+        DispatchQueue.main.async {
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.endUpdates()
         }
+        
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
