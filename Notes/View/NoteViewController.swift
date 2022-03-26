@@ -8,12 +8,12 @@
 import UIKit
 
 protocol NoteViewControllerDelegate: AnyObject {
-    func didFinishEdditingNote()
-    func didCancelNote(id: UUID)
+    func didFinishEdditingNote(note: Note)
+    func didCancel(note: Note)
 }
 
-class NoteViewController: UIViewController {
-
+class NoteViewController: UIViewController, UINavigationBarDelegate {
+    
     //MARK: - Properties
     let textView = UITextView()
     let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissKeyboard))
@@ -23,15 +23,16 @@ class NoteViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationItem.rightBarButtonItem = doneButton
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        
         self.view.backgroundColor = .white
         
-     
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTextView(notification:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTextView(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false 
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         
+        registerForNotifications()
         configureTextView()
         getNote()
     }
@@ -42,28 +43,25 @@ class NoteViewController: UIViewController {
             textView.becomeFirstResponder()
         }
     }
-    
+  
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if self.isMovingFromParent {
-            if let note = note {
-                if !note.text.isEmpty {
-                    note.date = Date()
-                    CoreDataManager.shared.save()
-                    delegate?.didFinishEdditingNote()
-                } else {
-                    delegate?.didCancelNote(id: note.id)
-                    CoreDataManager.shared.deleteNote(note: note)
-                }
+        if let note = note {
+            if !note.text.isEmpty {
+                note.date = Date()
+                CoreDataManager.shared.save()
+                delegate?.didFinishEdditingNote(note: note)
+            } else {
+                delegate?.didCancel(note: note)
+                CoreDataManager.shared.deleteNote(note: note)
             }
         }
     }
-
+    
     //MARK: - Methods
     @objc func dismissKeyboard() {
         textView.resignFirstResponder()
         self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.navigationItem.hidesBackButton = false
     }
     
     //MARK: Note
@@ -84,7 +82,16 @@ class NoteViewController: UIViewController {
             }
         }
     }
-
+    
+    //MARK: - Register For Notifications
+    func registerForNotifications()  {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTextView(notification:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTextView(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
     //MARK: - TextView Setup
     func configureTextView() {
         self.textView.translatesAutoresizingMaskIntoConstraints = false
@@ -104,10 +111,11 @@ class NoteViewController: UIViewController {
     }
 }
 
-    //MARK: - TextView Delegate Methods
+//MARK: - TextView Delegate Methods
 extension NoteViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.navigationItem.rightBarButtonItem?.isEnabled = true
+        self.navigationItem.hidesBackButton = true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

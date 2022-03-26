@@ -19,14 +19,6 @@ extension Note {
     @NSManaged public var id: UUID!
     @NSManaged public var text: String!
     @NSManaged public var date: Date!
-    
-//    convenience init(text: String, entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext!) {
-//        self.init()
-//        self.text = text
-//        self.id = UUID()
-//        self.date = Date()
-//    }
-
 }
 
 extension Note : Identifiable {

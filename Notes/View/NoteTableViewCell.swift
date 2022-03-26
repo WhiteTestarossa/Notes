@@ -28,18 +28,32 @@ class NoteTableViewCell: UITableViewCell {
     func configureCell() {
         configureTitleLabel()
         configureDescriptionLabel()
-        configureStackView()
+//        configureStackView()
         
-        contentView.addSubview(titlesStackView)
-        titlesStackView.addArrangedSubview(titleLabel)
-        titlesStackView.addArrangedSubview(descriptionLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            titlesStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20.0),
-            titlesStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10.0),
-            titlesStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20.0),
-            titlesStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10.0),
+            titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20.0),
+            titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20.0),
+            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10.0),
+            titleLabel.bottomAnchor.constraint(equalTo: self.descriptionLabel.topAnchor, constant: 5.0),
+            
+            descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20.0),
+            descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20.0),
+            descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 10.0),
         ])
+        
+//        contentView.addSubview(titlesStackView)
+//        titlesStackView.addArrangedSubview(titleLabel)
+//        titlesStackView.addArrangedSubview(descriptionLabel)
+//
+//        NSLayoutConstraint.activate([
+//            titlesStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20.0),
+//            titlesStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10.0),
+//            titlesStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20.0),
+//            titlesStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10.0),
+//        ])
     }
     
     //MARK: - StackView Setup
@@ -47,7 +61,7 @@ class NoteTableViewCell: UITableViewCell {
         titlesStackView.axis = .vertical
         titlesStackView.distribution = .fillEqually
         titlesStackView.translatesAutoresizingMaskIntoConstraints = false
-        titlesStackView.spacing = 4.0
+        titlesStackView.spacing = 2.0
     }
     
     //MARK: - Titles Setup

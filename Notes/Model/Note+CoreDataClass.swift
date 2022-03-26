@@ -13,11 +13,12 @@ import CoreData
 public class Note: NSManagedObject {
 
     var title: String {
-//        return text?.components(separatedBy: CharacterSet.newlines).first ?? ""
-        return text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).first ?? ""
+        return text.trimmingCharacters(in: CharacterSet.newlines)
     }
     
     var desc: String {
-        return "\(date!)"
+        var pureLines = text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).components(separatedBy: CharacterSet.newlines)
+        pureLines.removeFirst()
+        return "\(date.format())  \(pureLines.first ?? "")"
     }
 }

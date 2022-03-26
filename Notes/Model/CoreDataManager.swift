@@ -22,7 +22,6 @@ class CoreDataManager {
     //MARK: - Initilizer
     init(modelName: String) {
         self.persistantContainer = NSPersistentContainer(name: modelName)
-        print("INITED")
     }
     
     //MARK: - Core Data Setup
@@ -32,7 +31,6 @@ class CoreDataManager {
                 fatalError(error!.localizedDescription)
             }
         }
-  
     }
     
     func save() {

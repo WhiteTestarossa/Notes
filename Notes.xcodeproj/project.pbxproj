@@ -19,6 +19,7 @@
 		93E433FD27EF09CA00D16BA4 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E433FB27EF09CA00D16BA4 /* Note+CoreDataClass.swift */; };
 		93E433FE27EF09CB00D16BA4 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E433FC27EF09CA00D16BA4 /* Note+CoreDataProperties.swift */; };
 		93E4340027EF0F0800D16BA4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E433FF27EF0F0800D16BA4 /* CoreDataManager.swift */; };
+		93E4340427EF3C5900D16BA4 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E4340327EF3C5900D16BA4 /* DateFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		93E433FB27EF09CA00D16BA4 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
 		93E433FC27EF09CA00D16BA4 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		93E433FF27EF0F0800D16BA4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		93E4340327EF3C5900D16BA4 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,17 +70,14 @@
 		93E433D927EB508900D16BA4 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				93E4340127EF3AE700D16BA4 /* Model */,
 				93E433DA27EB508900D16BA4 /* AppDelegate.swift */,
 				93E433DC27EB508900D16BA4 /* SceneDelegate.swift */,
-				93E433DE27EB508900D16BA4 /* NoteListViewController.swift */,
-				93E433F627ECCBCC00D16BA4 /* NoteViewController.swift */,
-				93E433EE27EB56CF00D16BA4 /* NoteTableViewCell.swift */,
-				93E433F427EC6CB000D16BA4 /* FooterView.swift */,
+				93E4340127EF3AE700D16BA4 /* Model */,
+				93E4340527EF633300D16BA4 /* View */,
+				93E4340227EF3C2000D16BA4 /* Helpers */,
 				93E433E327EB508E00D16BA4 /* Assets.xcassets */,
 				93E433E527EB508E00D16BA4 /* LaunchScreen.storyboard */,
 				93E433E827EB508E00D16BA4 /* Info.plist */,
-				93E433F827EF093B00D16BA4 /* Notes.xcdatamodeld */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -89,8 +88,28 @@
 				93E433FF27EF0F0800D16BA4 /* CoreDataManager.swift */,
 				93E433FB27EF09CA00D16BA4 /* Note+CoreDataClass.swift */,
 				93E433FC27EF09CA00D16BA4 /* Note+CoreDataProperties.swift */,
+				93E433F827EF093B00D16BA4 /* Notes.xcdatamodeld */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		93E4340227EF3C2000D16BA4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				93E4340327EF3C5900D16BA4 /* DateFormatter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		93E4340527EF633300D16BA4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				93E433DE27EB508900D16BA4 /* NoteListViewController.swift */,
+				93E433F627ECCBCC00D16BA4 /* NoteViewController.swift */,
+				93E433EE27EB56CF00D16BA4 /* NoteTableViewCell.swift */,
+				93E433F427EC6CB000D16BA4 /* FooterView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93E4340427EF3C5900D16BA4 /* DateFormatter.swift in Sources */,
 				93E433F727ECCBCC00D16BA4 /* NoteViewController.swift in Sources */,
 				93E433DF27EB508900D16BA4 /* NoteListViewController.swift in Sources */,
 				93E433FA27EF093D00D16BA4 /* Notes.xcdatamodeld in Sources */,
