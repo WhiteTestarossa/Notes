@@ -39,6 +39,7 @@ class NoteViewController: UIViewController, UINavigationBarDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    
         if let text = self.textView.text, text.isEmpty {
             textView.becomeFirstResponder()
         }
@@ -74,6 +75,7 @@ class NoteViewController: UIViewController, UINavigationBarDelegate {
     //MARK: Prevent Keyboard Covering
     @objc func updateTextView(notification: Notification) {
         let userInfo = notification.userInfo
+        
         if let keybordSize = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if notification.name == UIResponder.keyboardWillHideNotification {
                 textView.contentInset = UIEdgeInsets.zero
@@ -95,12 +97,11 @@ class NoteViewController: UIViewController, UINavigationBarDelegate {
     //MARK: - TextView Setup
     func configureTextView() {
         self.textView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(textView)
         self.textView.delegate = self
         self.textView.font = UIFont.preferredFont(forTextStyle: .body)
         self.textView.textContentType = .none
         self.textView.autocapitalizationType = .sentences
-        
+        self.view.addSubview(textView)
         
         NSLayoutConstraint.activate([
             self.textView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -121,5 +122,4 @@ extension NoteViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         note?.text = textView.text
     }
-    
 }

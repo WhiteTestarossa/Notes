@@ -28,7 +28,6 @@ class NoteTableViewCell: UITableViewCell {
     func configureCell() {
         configureTitleLabel()
         configureDescriptionLabel()
-//        configureStackView()
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
@@ -43,25 +42,6 @@ class NoteTableViewCell: UITableViewCell {
             descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20.0),
             descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 10.0),
         ])
-        
-//        contentView.addSubview(titlesStackView)
-//        titlesStackView.addArrangedSubview(titleLabel)
-//        titlesStackView.addArrangedSubview(descriptionLabel)
-//
-//        NSLayoutConstraint.activate([
-//            titlesStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20.0),
-//            titlesStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10.0),
-//            titlesStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20.0),
-//            titlesStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10.0),
-//        ])
-    }
-    
-    //MARK: - StackView Setup
-    func configureStackView() {
-        titlesStackView.axis = .vertical
-        titlesStackView.distribution = .fillEqually
-        titlesStackView.translatesAutoresizingMaskIntoConstraints = false
-        titlesStackView.spacing = 2.0
     }
     
     //MARK: - Titles Setup

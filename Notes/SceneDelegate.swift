@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController(rootViewController: noteListVieController)
         
         if UserDefaults.standard.bool(forKey: "First Launch") != true {
-            let initialNote = CoreDataManager.shared.createNote(text: "Center for Financial Technologies (CFT) is a group of companies operating in the field of information technology for the financial sector since 1991.")
+            let initialNote = CoreDataManager.shared.createNote(text: "I'm very very first")
             noteListVieController.notes.append(initialNote)
             UserDefaults.standard.setValue(true, forKey: "First Launch")
         }

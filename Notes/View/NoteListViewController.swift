@@ -91,7 +91,6 @@ class NoteListViewController: UIViewController {
             visualEffectView.topAnchor.constraint(equalTo: self.footerView.topAnchor),
             visualEffectView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
-        
     }
     
     //MARK: - Create New Note
@@ -125,15 +124,19 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! NoteTableViewCell
+        
         cell.titleLabel.text = notes[indexPath.row].title
         cell.descriptionLabel.text = notes[indexPath.row].desc
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let noteViewController = NoteViewController()
+        
         noteViewController.note = notes[indexPath.row]
         noteViewController.delegate = self
+        
         navigationController?.pushViewController(noteViewController, animated: true)
     }
     
@@ -144,6 +147,7 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             CoreDataManager.shared.deleteNote(note: notes[indexPath.row])
+            
             tableView.beginUpdates()
             notes.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
